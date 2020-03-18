@@ -2,6 +2,7 @@ import os
 import sys
 sys.path.append('/home/icehap-daq/dvt/slackbot/')
 from chiba_daq_slackbot import send_warning, push_slow_mon
+import time
 
 def push_plot(file_path, name):
     try:
