@@ -3,9 +3,10 @@
 import numpy as np
 import os, sys
 from termcolor import colored
-from chiba_daq_slackbot import send_message, send_warning
 from datetime import datetime
 
+sys.path.append('/home/icehap-daq/dvt/slackbot/')
+from chiba_daq_slackbot import send_message, send_warning
 
 def add_to_backup(file_list, file_path):
 

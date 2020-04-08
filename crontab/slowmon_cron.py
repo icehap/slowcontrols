@@ -60,7 +60,7 @@ if __name__ == '__main__':
     cron = new_cron(cron, 'python3 /home/icehap-daq/software/plotting/temperature_plot.py', "hour", 2)
     cron = new_cron(cron, 'python3 /home/icehap-daq/software/plotting/slow_disk_plot.py', "hour", 2)
     cron = new_cron(cron, 'python3 /home/icehap-daq/dvt/crontab/push_update.py', "hour", 4)
-    cron = new_cron(cron, 'python3 /home/icehap-daq/dvt/crontab/backup_cron.py', "hour", 24)
+    cron = new_cron(cron, 'python3 /home/icehap-daq/dvt/crontab/backup_cron.py', "hour", 23)
 
     inspect_cron(cron)
 
