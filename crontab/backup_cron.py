@@ -5,8 +5,8 @@ import os, sys
 from termcolor import colored
 from datetime import datetime
 
-sys.path.append('/home/icehap-daq/dvt/slackbot/')
-from chiba_daq_slackbot import send_message, send_warning
+#sys.path.append('/home/icehap-daq/dvt/slackbot/')
+from chiba_slackbot import send_message, send_warning
 
 def add_to_backup(file_list, file_path):
 
@@ -23,7 +23,7 @@ def add_to_backup(file_list, file_path):
 
 def perform_backup(file_list):
     was_warn = False
-    msg_str = f"List of files being backed up: \n {file_list}"
+    msg_str = f"[Backup Cron] List of files being backed up: \n {file_list}"
     send_message(msg_str)
     
     today = datetime.today()
@@ -59,7 +59,7 @@ def perform_backup(file_list):
     if was_warn is True:
         return False
 
-    send_message("No errors during copying")
+    send_message("[Backup Cron] No errors during copying")
     return True
 
 def log_backup(file_list, log_file, _rtrn):
@@ -83,8 +83,8 @@ if __name__ == "__main__":
     file_list = []
     add_to_backup(file_list, '/home/icehap-daq/software/goldschmidt/goldschmidt/temp.csv')
     add_to_backup(file_list, '/home/icehap-daq/software/check_disk/disk_space.csv')
-    #add_to_backup(file_list, '/home/icehap-daq/dvt/freezer_ramp_down_5012.csv')
-    #add_to_backup(file_list, '/home/icehap-daq/dvt/freezer_ramp_down_5013.csv')
+    add_to_backup(file_list, '/home/icehap-daq/software/USBRH_driver/humidity_0.csv')
+    add_to_backup(file_list, '/home/icehap-daq/software/USBRH_driver/humidity_1.csv')
 
 
     rtrn = perform_backup(file_list)

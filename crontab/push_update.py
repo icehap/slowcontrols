@@ -1,7 +1,7 @@
 import os
 import sys
-sys.path.append('/home/icehap-daq/dvt/slackbot/')
-from chiba_daq_slackbot import send_warning, push_slow_mon
+#sys.path.append('/home/icehap-daq/dvt/slackbot/')
+from chiba_slackbot import send_warning, push_slow_mon
 import time
 
 def push_plot(file_path, name):
@@ -19,7 +19,14 @@ if __name__ == '__main__':
     push_plot(temperature_plot, "Freezer Temperature")
 
     #try to avoid pushing too fast
-    time.sleep(5)
+    time.sleep(15)
 
     disk_plot = "/home/icehap-daq/software/plotting/recent_disk.png"
     push_plot(disk_plot, "Disk Space")
+
+    time.sleep(15)
+
+    humidity_plot = "/home/icehap-daq/software/plotting/recent_humidity.png"
+    push_plot(humidity_plot, "Humidity")
+
+    time.sleep(15)
