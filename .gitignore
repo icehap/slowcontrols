@@ -1,5 +1,6 @@
 *.csv
 data/*
 daq/*
+uControl/pictures/*
 __pycache__/*
 slackbot/__pycache__/*
