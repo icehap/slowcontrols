@@ -3,6 +3,9 @@ import numpy as np
 import os, sys
 from termcolor import colored
 
+#sys.path.append('/home/icehap-daq/dvt/slackbot/')
+from chiba_slackbot import send_message
+
 def update_log(logfile, errorfile, tags):
 
     now = datetime.now()
@@ -10,7 +13,7 @@ def update_log(logfile, errorfile, tags):
     t_tags = str(tags['Tags'])
     t_name = str(tags['Name'])
     t_num = str(tags['Num'])
-    write_string = str(now) + ", " + t_tags + ", " + t_name + ", " + t_num
+    write_string = str(now) + ", " + t_tags + ", " + t_name + ", " + t_num + '\n'
     try:
         f.write(write_string)
     except:
@@ -46,7 +49,7 @@ def new_error(logfile):
     print(f"Creating new error file: {new_error_file}")
     
     info, tags = get_info(num)
-    f.write(info)
+    f.write(info + '\n')
     f.close()
 
     update_log(logfile, new_error_file, tags)
@@ -63,5 +66,8 @@ if __name__ == "__main__":
     logfile = "/home/icehap-daq/errors/log.txt"
 
     new_error(logfile) 
+
+    msg_text = "New error was logged to icehap-daq by a user in file: " + logfile
+    send_message(msg_text)
 
 ##end
