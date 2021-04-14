@@ -54,12 +54,14 @@ if __name__ == '__main__':
     cron = start_cron()
     print("Adding jobs to cron...")
 
-    cron = new_cron(cron, 'python3 /home/icehap-daq/dvt/crontab/check_cron.py', "hour", 2)
+    cron = new_cron(cron, 'python3 /home/icehap-daq/dvt/crontab/check_cron.py', "hour", 12)
     cron = new_cron(cron, 'python3 /home/icehap-daq/software/goldschmidt/goldschmidt/record_temp.py /dev/ttyUSB1 1 2 3 4 /home/icehap-daq/software/goldschmidt/goldschmidt/temp.csv', "min", 10)
-    cron = new_cron(cron, 'python3 /home/icehap-daq/software/check_disk/slow_disk_check.py / /home/icehap-daq/software/check_disk/disk_space.csv', "min", 30)
+    cron = new_cron(cron, 'python3 /home/icehap-daq/software/USBRH_driver/humidity_readout.py', "min", 10)
+    cron = new_cron(cron, 'python3 /home/icehap-daq/software/check_disk/slow_disk_check.py / /home/icehap-daq/software/check_disk/disk_space.csv', "hour", 2)
     cron = new_cron(cron, 'python3 /home/icehap-daq/software/plotting/temperature_plot.py', "hour", 2)
     cron = new_cron(cron, 'python3 /home/icehap-daq/software/plotting/slow_disk_plot.py', "hour", 2)
-    cron = new_cron(cron, 'python3 /home/icehap-daq/dvt/crontab/push_update.py', "hour", 4)
+    cron = new_cron(cron, 'python3 /home/icehap-daq/software/plotting/humidity_plot.py', "hour", 2)
+    cron = new_cron(cron, 'python3 /home/icehap-daq/dvt/crontab/push_update.py', "hour", 6)
     cron = new_cron(cron, 'python3 /home/icehap-daq/dvt/crontab/backup_cron.py', "hour", 23)
 
     inspect_cron(cron)
