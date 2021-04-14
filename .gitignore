@@ -1,2 +1,5 @@
 *.csv
 data/*
+daq/*
+__pycache__/*
+slackbot/__pycache__/*
