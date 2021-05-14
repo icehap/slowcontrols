@@ -1,6 +1,7 @@
 from crontab import CronTab
 import os,sys
-#sys.path.append('/home/icehap-daq/dvt/slackbot/')
+sys.path.append('/home/icehap-daq/dvt/slackbot')
+import chiba_slackbot
 from chiba_slackbot import send_message, send_warning
 from datetime import datetime
 
