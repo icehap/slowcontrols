@@ -61,14 +61,14 @@ def freezer_monitor(frz_set, pic_path):
 def freezer_control(frz_set, fcurrent, fdelta, pic_path):
     prepare_control(frz_set)
     newt = fcurrent + fdelta
-    print(f"Change temperature from {str(fcurrent)} to {str(newt)}")
+    print(f"Change temperature from {fcurrent} to {newt}")
  
     Tnow = fcurrent
     Tdelta = fdelta
 
-    if fdelta < 0:
+    if Tdelta < 0:
         step_down(Tnow, Tdelta)
-    if fdelta > 0:
+    elif Tdelta > 0:
         step_up(Tnow, Tdelta)
     else:
         raise ValueError(f'Could not parse input {fdelta} for step up or down')
