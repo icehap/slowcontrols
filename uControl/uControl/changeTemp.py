@@ -6,7 +6,7 @@ import cv2
 import click
 
 #does this power cycle the MFH?
-#YES IT DOES
+#IT USED TO - DEFAULT BEHAVIOUR ON BOARD CHANGED: 2021/07
 import board
 import digitalio
 
@@ -17,7 +17,9 @@ from chiba_slackbot import send_message, send_warning, push_slow_mon
 @click.option('--fcurrent', default=None)
 @click.option('--fdelta', default=None)
 def main(monitor, fcurrent, fdelta):
+    control_wrapper(monitor, fcurrent, fdelta)
 
+def control_wrapper(monitor, fcurrent, fdelta):
     pic_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pictures")
     if not os.path.exists(pic_path):
         os.mkdir(pic_path)
