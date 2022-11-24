@@ -2,6 +2,8 @@ import sys
 from slack import WebClient
 from chiba_slackbot import info
 import aiohttp
+import ssl
+import certifi
 
 def retry_connection(func):
     def wrapper(*args, **kwargs):
@@ -10,11 +12,14 @@ def retry_connection(func):
         except aiohttp.client_exceptions.ClientConnectorError:
             func(*args, **kwargs)
         return
-    return wrapper 
+    return wrapper
 
 def start_bot():
     token = info.token
-    slack_client = WebClient(token)
+    ssl_context = ssl.create_default_context(cafile=certifi.where())
+    slack_client = WebClient(token=info.token, ssl=ssl_context)
+    ##still works in icehap-daq but not on grappa
+    #slack_client = WebClient(token)
     #slack_client.connect()
     #slack_client.chat_postMessage(channel="#chiba-daq", text="Slow Monitoring Online")
     return slack_client
@@ -25,7 +30,7 @@ def send_message(msg):
     slack_client.chat_postMessage(channel=info.channel, text=msg)
 
 @retry_connection
-def send_warning(msg, shifter_id=info.shifter_id, 
+def send_warning(msg, shifter_id=info.shifter_id,
                  expert_id=info.expert_id,
 		 admin_id=info.admin_id):
     slack_client = start_bot()
@@ -35,7 +40,7 @@ def send_warning(msg, shifter_id=info.shifter_id,
     slack_client.chat_postMessage(channel=admin_id, text=msg)
 
 @retry_connection
-def send_critical(msg, shifter_id=info.shifter_id, expert_id1=info.expert_id, 
+def send_critical(msg, shifter_id=info.shifter_id, expert_id1=info.expert_id,
                   expert_id2=info.shifter_idbkp, admin_id=info.admin_id):
     slack_client = start_bot()
     slack_client.chat_postMessage(channel=info.channel, text=msg)
